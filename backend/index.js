@@ -37,7 +37,16 @@ import userRoutes from "./routes/userRoutes.js";
 
 dotenv.config()
 
-let port = 8000;
+const allowedOrigins = [
+  /^http:\/\/localhost:\d+$/,
+  /^https:\/\/.*\.vercel\.app$/,
+];
+
+if (process.env.FRONTEND_URL) {
+  allowedOrigins.push(process.env.FRONTEND_URL);
+}
+
+let port = process.env.PORT || 8000;
 let app = express();
 
 app.use(express.json());
@@ -46,7 +55,21 @@ app.use(cookieParser());
 app.use("/uploads", express.static("uploads"));
 app.use(
   cors({
-    origin: [/^http:\/\/localhost:\d+$/],
+    origin(origin, callback) {
+      if (!origin) {
+        return callback(null, true);
+      }
+
+      const isAllowed = allowedOrigins.some((rule) =>
+        rule instanceof RegExp ? rule.test(origin) : rule === origin
+      );
+
+      if (isAllowed) {
+        return callback(null, true);
+      }
+
+      return callback(new Error("CORS blocked for this origin"));
+    },
     credentials: true,
   })
 );
