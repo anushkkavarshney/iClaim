@@ -1,3 +1,5 @@
+
+This is a claim automation system.
 # iClaim
 
 AI-assisted insurance claim automation platform with customer, agent, and admin portals for claim filing, document review, assignment, approval workflow, and payment tracking.
