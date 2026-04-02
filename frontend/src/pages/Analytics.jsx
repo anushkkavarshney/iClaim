@@ -6,6 +6,7 @@ import {
 import { Legend } from "recharts";
 
 import { useEffect, useState } from "react";
+import { API_BASE_URL } from "@/lib/aiScreening";
 
 const COLORS = ["#00C49F", "#FF8042", "#0088FE", "#FFBB28"];
 
@@ -30,7 +31,7 @@ export default function Analytics() {
     try {
       const token = localStorage.getItem("token");
 
-      const res = await fetch("http://localhost:8000/api/claims", {
+      const res = await fetch(`${API_BASE_URL}/api/claims`, {
         headers: { Authorization: `Bearer ${token}` },
       });
 

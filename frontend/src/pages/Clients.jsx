@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { API_BASE_URL } from "@/lib/aiScreening";
 import { Card } from "@/components/ui/card";
 import {
   Table,
@@ -20,7 +21,7 @@ const Clients = () => {
     try {
       const token = localStorage.getItem("token");
 
-      const res = await fetch("http://localhost:8000/api/users/clients", {
+      const res = await fetch(`${API_BASE_URL}/api/users/clients`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },

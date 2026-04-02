@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { AUTH_API_URL } from "@/lib/aiScreening";
 
 export default function Auth() {
   const navigate = useNavigate();
@@ -9,8 +10,6 @@ export default function Auth() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [fullName, setFullName] = useState("");
-
-  const API_URL = "http://localhost:8000/api/auth";
 
   const redirectUser = (role) => {
     if (role === "admin") navigate("/admin");
@@ -30,7 +29,7 @@ export default function Auth() {
     try {
       setLoading(true);
 
-      const res = await fetch(`${API_URL}/register`, {
+      const res = await fetch(`${AUTH_API_URL}/register`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -59,7 +58,7 @@ export default function Auth() {
     try {
       setLoading(true);
 
-      const res = await fetch(`${API_URL}/login`, {
+      const res = await fetch(`${AUTH_API_URL}/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

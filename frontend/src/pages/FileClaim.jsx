@@ -15,6 +15,7 @@ import {
 } from "@/components/ui/select";
 import { Upload, FileText } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { API_BASE_URL } from "@/lib/aiScreening";
 
 const FileClaim = () => {
   const navigate = useNavigate();
@@ -57,7 +58,7 @@ const FileClaim = () => {
     try {
       const token = localStorage.getItem("token"); // 🔥 IMPORTANT
 
-      const res = await fetch("http://localhost:8000/api/claims", {
+      const res = await fetch(`${API_BASE_URL}/api/claims`, {
         method: "POST",
         headers: {
           Authorization: `Bearer ${token}`, // 🔥 FIX

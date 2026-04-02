@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { AUTH_API_URL } from "@/lib/aiScreening";
 
 const getStoredUser = () => {
   const token = localStorage.getItem("token");
@@ -43,7 +44,7 @@ export const useAuth = () => {
 
   const signUp = async (name, email, password, role = "customer") => {
     try {
-      const res = await fetch("http://localhost:8000/api/auth/register", {
+      const res = await fetch(`${AUTH_API_URL}/register`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ name, email, password, role }),
@@ -62,7 +63,7 @@ export const useAuth = () => {
 
   const signIn = async (email, password) => {
     try {
-      const res = await fetch("http://localhost:8000/api/auth/login", {
+      const res = await fetch(`${AUTH_API_URL}/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),
